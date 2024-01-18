@@ -1,0 +1,55 @@
+.user-list {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+
+  list-style: none;
+  gap: 20px;
+  flex-wrap: wrap;
+  align-items: center;
+  padding: 0;
+  &__item {
+    background-color: rgba(208, 209, 205, 0.185);
+  }
+
+  @media screen and (min-width: 600px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  @media screen and (min-width: 1100px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+}
+
+.user-card {
+  display: flex;
+  align-items: center;
+  border: 1px solid #ccc;
+  padding: 10px;
+  border-radius: 8px;
+
+  &__image {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 10px;
+  }
+
+  &__info {
+    p {
+      margin: 0;
+    }
+
+    &__name {
+      font-weight: bold;
+    }
+
+    &__button {
+      background-color: #4caf50;
+      color: #fff;
+      padding: 8px 12px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+  }
+}

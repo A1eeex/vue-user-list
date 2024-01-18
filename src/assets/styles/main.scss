@@ -1,0 +1,14 @@
+// atoms
+@import 'atoms/Module.scss';
+@import 'atoms/Pagination.scss';
+@import 'atoms/NewUse.scss';
+
+// components
+@import 'components/UserList.scss';
+@import 'components/CurrentUser.scss';
+@import 'components/Filter.scss';
+@import 'components/Header.scss';
+
+.container {
+    padding: 10px 20px;
+}
