@@ -1,3 +1,5 @@
+// utils
+@import './utils/styleReset.scss';
 @import './utils/variables.scss';
 
 // atoms
@@ -11,9 +13,13 @@
 @import 'components/CurrentUser.scss';
 @import 'components/Filter.scss';
 @import 'components/Header.scss';
+@import 'components/Main.scss';
 
 .container {
-  padding: 10px 20px;
+  padding: 0px 20px;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
 
 .notification {

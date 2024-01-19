@@ -18,46 +18,50 @@
       {{ buttonText }}
     </button>
   </header>
+  <main class="main">
+    <div v-if="isShowNewUser" class="new-user">
+      <h3 class="new-user__title">Add New User</h3>
+      <form class="new-user__form" @submit.prevent="addUser">
+        <label for="name" class="new-user__label">Name:</label>
+        <input
+          type="text"
+          id="name"
+          class="new-user__input"
+          v-model="newUser.first_name"
+          required
+        />
 
-  <div v-if="isShowNewUser" class="new-user">
-    <h3 class="new-user__title">Add New User</h3>
-    <form class="new-user__form" @submit.prevent="addUser">
-      <label for="name" class="new-user__label">Name:</label>
-      <input
-        type="text"
-        id="name"
-        class="new-user__input"
-        v-model="newUser.first_name"
-        required
-      />
+        <label for="email" class="new-user__label">Email:</label>
+        <input
+          type="email"
+          id="email"
+          class="new-user__input"
+          v-model="newUser.email"
+          required
+        />
 
-      <label for="email" class="new-user__label">Email:</label>
-      <input
-        type="email"
-        id="email"
-        class="new-user__input"
-        v-model="newUser.email"
-        required
-      />
+        <button type="submit" class="new-user__submit">Add User</button>
+      </form>
+    </div>
 
-      <button type="submit" class="new-user__submit">Add User</button>
-    </form>
-  </div>
+    <h1 v-if="isLoading"><Loader /></h1>
 
-  <h1 v-if="isLoading"><Loader /></h1>
-  <UserList
-    v-if="!isLoading"
-    :users="paginatedUsers"
-    :onDeleteUser="handleDeleteUser"
-    @currentUser="
-      (data) => {
-        handleCurrentUserEvent(data);
-      }
-    "
-  />
-  <div class="notification is-warning" v-if="paginatedUsers.length === 0">
-    There are no users matching current filter criteria
-  </div>
+    <UserList
+      v-if="!isLoading"
+      :users="paginatedUsers"
+      :onDeleteUser="handleDeleteUser"
+      @currentUser="
+        (data) => {
+          handleCurrentUserEvent(data);
+        }
+      "
+    />
+
+    <div class="notification is-warning" v-if="paginatedUsers.length === 0">
+      There are no users matching current filter criteria
+    </div>
+  </main>
+
   <div v-if="paginatedUsers.length > 0" class="pagination">
     <button
       class="pagination__button"
