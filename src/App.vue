@@ -11,13 +11,14 @@
     </div>
 
     <button
-      :class="{ 'close-user-btn': isShowNewUser }"
+      :class="{'close-user-btn': isShowNewUser }"
       class="show-user-btn"
       @click.prevent="handleShowUser"
     >
       {{ buttonText }}
     </button>
   </header>
+
   <main class="main">
     <div v-if="isShowNewUser" class="new-user">
       <h3 class="new-user__title">Add New User</h3>
@@ -44,22 +45,22 @@
       </form>
     </div>
 
+    <div class="notification is-warning" v-if="paginatedUsers.length === 0">
+      There are no users matching current filter criteria
+    </div>
     <h1 v-if="isLoading"><Loader /></h1>
 
     <UserList
       v-if="!isLoading"
       :users="paginatedUsers"
       :onDeleteUser="handleDeleteUser"
+      :idCardDeleted="idCardDeleted"
       @currentUser="
         (data) => {
           handleCurrentUserEvent(data);
         }
       "
     />
-
-    <div class="notification is-warning" v-if="paginatedUsers.length === 0">
-      There are no users matching current filter criteria
-    </div>
   </main>
 
   <div v-if="paginatedUsers.length > 0" class="pagination">
@@ -107,7 +108,7 @@ export default {
       per_page: 6,
       errorMessage: '',
       isShowNewUser: false,
-
+      idCardDeleted: null,
       newUser: {
         first_name: '',
         email: '',
@@ -201,13 +202,15 @@ export default {
 
     async handleDeleteUser(userId) {
       try {
+        this.idCardDeleted = userId;
+        console.log(this.idCardDeleted)
         await axios.delete(`https://reqres.in/api/users/${userId}`);
-        console.log(`User with ID ${userId} deleted successfully.`);
-
         this.users = this.users.filter((user) => user.id !== userId);
       } catch (error) {
         this.errorMessage = 'Error deleted';
         console.error(`Error deleting user with ID ${userId}:`, error);
+      } finally {
+         this.idCardDeleted = null;
       }
     },
 

@@ -1,30 +1,37 @@
 .user-list {
   display: grid;
   grid-template-columns: repeat(1, 1fr);
-  width: 100%;
-  list-style: none;
   gap: 20px;
   flex-wrap: wrap;
   align-items: center;
+  list-style: none;
   padding: 0;
 
+  @media screen and (min-width: 600px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media screen and (min-width: 1100px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
   &__item {
+    position: relative;
     display: flex;
     align-items: center;
     justify-content: space-between;
     height: 100px;
     border: 1px solid #ccc;
     border-radius: 8px;
-    background-color: rgba(208, 209, 205, 0.185);
+    background-color: $secondary-color;
+    transition: all 0.3s linear;
+
+    &:hover {
+      transform: scale(1.1);
+    }
   }
 
-  @media screen and (min-width: 600px) {
-    grid-template-columns: repeat(2, 1fr);
-  }
-  @media screen and (min-width: 1100px) {
-    grid-template-columns: repeat(3, 1fr);
-  }
-  &__delete{
+  &__delete {
     height: 100%;
     width: 14%;
     padding: 8px 12px;
@@ -32,26 +39,39 @@
     background-color: $error_color;
     opacity: 0.8;
     border: none;
-    border-radius: 0px 7px 7px 0px;
-    color: $whiite-color;
+    border-radius: 0px 8px 8px 0px;
+    color: $white-color;
     cursor: pointer;
 
     &:hover {
       opacity: 1;
-
       background-color: $error_color;
     }
   }
 }
+
 
 .user-card {
   display: flex;
   align-items: center;
   width: 100%;
   padding: 10px;
-  
+  color: $white-color;
   cursor: pointer;
- 
+
+  &__loader {
+    position: absolute;
+    z-index: 2;
+    height: 100%;
+    left: 0;
+    right: 0;
+    background: $secondary-color;
+    opacity: 0.5;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+  }
+
   &__image {
     width: 50px;
     height: 50px;
@@ -60,10 +80,6 @@
   }
 
   &__info {
-    p {
-      margin: 0;
-    }
-
     &__name {
       font-weight: bold;
     }

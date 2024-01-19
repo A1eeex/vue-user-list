@@ -7,6 +7,7 @@
       :key="user.id"
     >
       <div @click="handleShowUser(user.id)" class="user-card">
+        <div v-if="user.id === idCardDeleted" class="user-card__loader"><Loader/></div>
         <img
           :src="user.avatar"
           :alt="user.first_name"
@@ -44,6 +45,7 @@
 <script>
 import CurrentUser from './CurrentUser.vue';
 import Modal from '../atoms/Modal.vue';
+import Loader from '../atoms/Loader.vue';
 
 export default {
   name: 'UserList',
@@ -51,10 +53,12 @@ export default {
   components: {
     CurrentUser,
     Modal,
+    Loader,
   },
   props: {
     users: Array,
     onDeleteUser: Function,
+    idCardDeleted: Number,
   },
   data() {
     return {
