@@ -13,5 +13,17 @@
 @import 'components/Header.scss';
 
 .container {
-    padding: 10px 20px;
+  padding: 10px 20px;
+}
+
+.notification {
+  background-color: #f5f5f5;
+  border-radius: 4px;
+  position: relative;
+  padding: 1.25rem 2.5rem 1.25rem 1.5rem;
+}
+
+.is-warning {
+  background-color: #ffe08a;
+  color: rgba(0, 0, 0, 0.7);
 }

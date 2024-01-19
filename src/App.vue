@@ -10,7 +10,13 @@
       />
     </div>
 
-    <button  :class="{ 'close-user-btn': isShowNewUser }"  class="show-user-btn" @click.prevent="handleShowUser">{{ buttonText }}</button>
+    <button
+      :class="{ 'close-user-btn': isShowNewUser }"
+      class="show-user-btn"
+      @click.prevent="handleShowUser"
+    >
+      {{ buttonText }}
+    </button>
   </header>
 
   <div v-if="isShowNewUser" class="new-user">
@@ -37,10 +43,10 @@
       <button type="submit" class="new-user__submit">Add User</button>
     </form>
   </div>
-  <h1 v-if="isLoading"><Loader /></h1>
 
+  <h1 v-if="isLoading"><Loader /></h1>
   <UserList
-    v-else
+    v-if="!isLoading"
     :users="paginatedUsers"
     :onDeleteUser="handleDeleteUser"
     @currentUser="
@@ -49,7 +55,10 @@
       }
     "
   />
-  <div class="pagination">
+  <div class="notification is-warning" v-if="paginatedUsers.length === 0">
+    There are no users matching current filter criteria
+  </div>
+  <div v-if="paginatedUsers.length > 0" class="pagination">
     <button
       class="pagination__button"
       @click="handlePageChange('prev')"
@@ -124,7 +133,6 @@ export default {
     this.fetchUsers();
   },
   methods: {
-
     handleShowUser() {
       this.isShowNewUser = !this.isShowNewUser;
     },
