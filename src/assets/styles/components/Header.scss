@@ -1,6 +1,18 @@
 .header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 
+  .show-user-btn {
+    padding: 10px 15px;
+    border: none;
+    cursor: pointer;
+    color: white;
+    background-color: #4caf50; 
+  }
+
+  .close-user-btn { 
+    background-color: #dd2828; 
+    color: rgb(255, 255, 255);
+  }
 }

@@ -1,5 +1,4 @@
 <template>
-  <h2>{{ filteredUsers.length }}</h2>
   <header class="header">
     <div class="filter">
       <input
@@ -11,7 +10,7 @@
       />
     </div>
 
-    <button @click.prevent="handleShowUser">Add new User</button>
+    <button  :class="{ 'close-user-btn': isShowNewUser }"  class="show-user-btn" @click.prevent="handleShowUser">{{ buttonText }}</button>
   </header>
 
   <div v-if="isShowNewUser" class="new-user">
@@ -95,6 +94,7 @@ export default {
       per_page: 6,
       errorMessage: '',
       isShowNewUser: false,
+
       newUser: {
         first_name: '',
         email: '',
@@ -114,15 +114,21 @@ export default {
       const endIndex = startIndex + this.per_page;
       return this.filteredUsers.slice(startIndex, endIndex);
     },
+
+    buttonText() {
+      return this.isShowNewUser ? 'Close Add New User' : 'Add new User';
+    },
   },
 
   mounted() {
     this.fetchUsers();
   },
   methods: {
+
     handleShowUser() {
       this.isShowNewUser = !this.isShowNewUser;
     },
+
     handleCurrentUserEvent(data) {
       this.users = this.users.map((user) => {
         if (user.id == data.id) {

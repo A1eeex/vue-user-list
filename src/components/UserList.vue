@@ -1,7 +1,12 @@
 <template>
   <ul class="user-list">
-    <li class="user-list__item" v-for="user in users" :key="user.id">
-      <div class="user-card">
+    <li
+      
+      class="user-list__item"
+      v-for="user in users"
+      :key="user.id"
+    >
+      <div @click="handleShowUser(user.id)" class="user-card">
         <img
           :src="user.avatar"
           :alt="user.first_name"
@@ -10,13 +15,9 @@
         <div class="user-card__info">
           <p class="user-card__name">{{ user.first_name }}</p>
           <p class="user-card__email">{{ user.email }}</p>
-          <button @click="handleShowUser(user.id)" class="user-card__button">
-            more info
-          </button>
-
-          <button @click="deleteUser(user.id)">DELETE</button>
         </div>
       </div>
+      <button class="user-list__delete" @click.prevent="deleteUser(user.id)">X</button>
     </li>
   </ul>
 
