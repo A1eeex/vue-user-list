@@ -1,7 +1,10 @@
+@import './utils/variables.scss';
+
 // atoms
 @import 'atoms/Module.scss';
 @import 'atoms/Pagination.scss';
 @import 'atoms/NewUse.scss';
+@import 'atoms/Loader.scss';
 
 // components
 @import 'components/UserList.scss';
