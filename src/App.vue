@@ -11,7 +11,7 @@
     </div>
 
     <button
-      :class="{'close-user-btn': isShowNewUser }"
+      :class="{ 'close-user-btn': isShowNewUser }"
       class="show-user-btn"
       @click.prevent="handleShowUser"
     >
@@ -71,12 +71,12 @@
     >
       prev
     </button>
-    <span>{{ currentPage }}/{{ totalPages }}</span>
+    <span>{{ currentPage }}/{{ totalPagesComputed }}</span>
     <button
       class="pagination__button"
       @click="handlePageChange('next')"
       :disabled="
-        currentPage === totalPages ||
+        currentPage === totalPagesComputed ||
         currentPage * per_page >= filteredUsers.length
       "
     >
@@ -131,6 +131,9 @@ export default {
 
     buttonText() {
       return this.isShowNewUser ? 'Close Add New User' : 'Add new User';
+    },
+    totalPagesComputed() {
+      return Math.ceil(this.users.length / this.per_page);
     },
   },
 
@@ -203,14 +206,14 @@ export default {
     async handleDeleteUser(userId) {
       try {
         this.idCardDeleted = userId;
-        console.log(this.idCardDeleted)
+        console.log(this.idCardDeleted);
         await axios.delete(`https://reqres.in/api/users/${userId}`);
         this.users = this.users.filter((user) => user.id !== userId);
       } catch (error) {
         this.errorMessage = 'Error deleted';
         console.error(`Error deleting user with ID ${userId}:`, error);
       } finally {
-         this.idCardDeleted = null;
+        this.idCardDeleted = null;
       }
     },
 
