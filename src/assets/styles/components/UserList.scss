@@ -29,14 +29,17 @@
     width: 10%;
     padding: 8px 12px;
     font-size: 18px;
-    background-color: #dd2828;
+    background-color: $error_color;
+    opacity: 0.8;
     border: none;
     border-radius: 0px 7px 7px 0px;
     color: #fff;
     cursor: pointer;
 
     &:hover {
-      background-color: #9e1e1e;
+      opacity: 1;
+
+      background-color: $error_color;
     }
   }
 }

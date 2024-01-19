@@ -13,7 +13,7 @@
     </p>
     <p class="current-user__info">id: {{ userData.id }}</p>
 
-    <button @click.prevent="handleEdit">edit</button>
+    <button class="current-user__edit" @click.prevent="handleEdit">edit</button>
   </div>
 
   <form
